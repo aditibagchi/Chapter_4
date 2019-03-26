@@ -1,0 +1,7 @@
+﻿Sample_ID,Case,TMD,Filtering_Strategy,Source 
+BreastCA-FR,BCA,0.68,Germline,FROZEN
+CRC-1-FR,CRC-1,1.18,Germline,FROZEN
+CRC-2-FR,CRC-2,20.6,Germline,FROZEN
+BreastCA-FR,BCA,0.98,Filtering_Pipeline,FROZEN
+CRC-1-FR,CRC-1,1.23,Filtering_Pipeline,FROZEN
+CRC-2-FR,CRC-2,12.34,Filtering_Pipeline,FROZEN

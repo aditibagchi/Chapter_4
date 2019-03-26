@@ -1,0 +1,7 @@
+﻿Sample_ID,Case,TMD,Filtering_Strategy,Source 
+BreastCA-FF,BCA,0.6,Germline,FFPE
+CRC-1-FF,CRC-1,1.3,Germline,FFPE
+CRC-2-FF,CRC-2,20,Germline,FFPE
+BreastCA-FF,BCA,1.05,Filtering_Pipeline,FFPE
+CRC-1-FF,CRC-1,1.63,Filtering_Pipeline,FFPE
+CRC-2-FF,CRC-2,16.05,Filtering_Pipeline,FFPE
