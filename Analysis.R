@@ -155,3 +155,4 @@ ggplot(data=CRC_1, aes(x=CRC_1$Data, y=CRC_1$Numbers, fill=Data)) +
   scale_y_continuous(name="Mutations")+
   scale_fill_brewer(palette = "Set1") + theme(axis.text.x = element_text(color = "black", size = 10, angle = 90)) + 
   theme_minimal()
+XX
