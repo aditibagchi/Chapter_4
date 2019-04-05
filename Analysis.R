@@ -47,8 +47,8 @@ Tumor_Pipeline_FF_maf = maftools::read.maf(maf=Tumor_Pipeline_FF)
 mafSummary(Tumor_Germline_FF_maf)
 plotmafSummary(Tumor_Germline_FF_maf)
 plotmafSummary(Tumor_Pipeline_FF_maf)
-Tumor_Pipeline_FF_maf.titv = titv(maf = Tumor_Pipeline_FF_maf, plot = FALSE, useSyn = TRUE)
-plotTiTv(res = Tumor_Pipeline_FF_maf.titv)
+Tumor_Germline_FF_maf.titv = titv(maf = Tumor_Pipeline_FF_maf, plot = FALSE, useSyn = TRUE)
+plotTiTv(res = Tumor_Germline_FF_maf.titv)
 
 
 
@@ -87,11 +87,11 @@ str(Tumor_Germline_FF_Sigs)
 Tumor_Germline_FF_Sigs = as.data.frame(Tumor_Germline_FF_Sigs)
 sigs.input.Germline.FF = mut.to.sigs.input(mut.ref = Tumor_Germline_FF_Sigs, sample.id = "sample",chr = "chr", pos = "pos", ref = "ref", alt = "alt", bsg = BSgenome.Hsapiens.UCSC.hg38)
 View(sigs.input.Germline.FF)
-BreastCA_FF  <- whichSignatures(tumor.ref = sigs.input.Germline.FF, sample.id = "BreastCA-FF",
+CRC_2  <- whichSignatures(tumor.ref = sigs.input.Germline.FF, sample.id = "CRC-2-FF",
                          signatures.ref = signatures.nature2013, associated = c(),
                          signatures.limit = NA, signature.cutoff = 0.06, contexts.needed = TRUE,
                          tri.counts.method = "default")
-plotSignatures(BreastCA_FF)
+plotSignatures(CRC_2)
 
 ##Mutationsignatures
 ##Filteringpipeline
@@ -102,7 +102,7 @@ View(Tumor_Pipeline_FF_Sigs)
 setnames(Tumor_Pipeline_FF_Sigs, old=c("Start_Position", "Chromosome", "Reference_Allele", "Tumor_Seq_Allele2", "Tumor_Sample_Barcode"), new=c("pos","chr", "ref", "alt", "sample"))
 sigs.input.Pipeline.FF = mut.to.sigs.input(mut.ref = Tumor_Pipeline_FF_Sigs, sample.id = "sample",chr = "chr", pos = "pos", ref = "ref", alt = "alt", bsg = BSgenome.Hsapiens.UCSC.hg38)
 View(sigs.input.Pipeline.FF)
-CRC_2_FF  <- whichSignatures(tumor.ref = sigs.input.Pipeline.FF, sample.id = "CRC-2-FF",
+CRC_1_FF  <- whichSignatures(tumor.ref = sigs.input.Pipeline.FF, sample.id = "CRC-1-FF",
                                 signatures.ref = signatures.nature2013, associated = c(),
                                 signatures.limit = NA, signature.cutoff = 0.06, contexts.needed = TRUE,
                                 tri.counts.method = "default")
@@ -124,3 +124,34 @@ X = ggplot(data= subsitution_fractions, aes(x=subsitution_fractions$Filtering, y
 S= X + facet_wrap(~Tumor)
 
 
+##Signature Comparison plots
+
+cols <- c("S-11" = "grey5", "S-18" = "gray46" , "S-03" = "deeppink4", "S-04" = "slategray1", "S-05" = "slateblue1", "S-06" = "navy", "S-08" = "lightpink3", "S-09" = "snow2", "S-U" = "grey70", "S-01" = "mediumseagreen", "S-12" = "cyan", "S-15" = "blue", "S-07" = "darkslateblue", "S-20"= "orange1") 
+
+Signature <- read.csv("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Chapter 4/Chapter_4/Signatures.csv")
+X <- ggplot(data= Signature, aes(x=Filtering, y=Fraction, fill= Signature))+
+     geom_bar(stat="identity") +  scale_y_continuous(name="Fraction Contribution") + theme_minimal()+
+  scale_fill_manual(values = cols)+
+  theme(axis.text.x = element_text(color = "black", size = 8, angle = 90)) + xlab("Tumor")
+S <- X+facet_wrap(~Tumor) 
+
+## Figures for filtering piepline
+BreastCA <- read.csv("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Chapter 4/Chapter_4/BreastCA_Fitering.csv")
+View(BreastCA)
+ggplot(data=BreastCA, aes(x=BreastCA$Data, y=BreastCA$Numbers, fill=Data)) +
+  geom_bar(stat="identity",position=position_dodge())+ 
+  scale_y_continuous(name="Mutations")+
+  scale_fill_brewer(palette = "Set1") + theme(axis.text.x = element_text(color = "black", size = 10, angle = 90)) + 
+   theme_minimal()
+CRC_2 <- read.csv("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Chapter 4/Chapter_4/CRC_2.csv")
+ggplot(data=CRC_2, aes(x=CRC_2$Data, y=CRC_2$Numbers, fill=Data)) +
+  geom_bar(stat="identity",position=position_dodge())+ 
+  scale_y_continuous(name="Mutations")+
+  scale_fill_brewer(palette = "Set1") + theme(axis.text.x = element_text(color = "black", size = 10, angle = 90)) + 
+  theme_minimal()
+CRC_1 <- read.csv("/Volumes/G-DRIVE mobile/Data_Analysis/Thesis/Chapter 4/Chapter_4/Copy of CRC_1.csv")
+ggplot(data=CRC_1, aes(x=CRC_1$Data, y=CRC_1$Numbers, fill=Data)) +
+  geom_bar(stat="identity",position=position_dodge())+ 
+  scale_y_continuous(name="Mutations")+
+  scale_fill_brewer(palette = "Set1") + theme(axis.text.x = element_text(color = "black", size = 10, angle = 90)) + 
+  theme_minimal()
